@@ -82,19 +82,282 @@ FAILURES = {
 
 CSS = '''
 <style>
-.stApp { background:#F2F4F7; }
-.block-container { max-width:520px; padding-top:1.2rem; }
-.card { background:white; border:1px solid #E4E7EC; border-radius:24px; padding:20px; margin-bottom:14px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
-.yellow { background:#FFF8D6; border:2px solid #FFD400; border-radius:22px; padding:18px; margin-bottom:12px; }
-.title { font-size:32px; font-weight:900; text-align:center; }
-.sub { color:#667085; text-align:center; font-size:15px; margin-top:6px; }
-.sec { font-size:22px; font-weight:900; margin:12px 0; }
-.bubble { font-size:20px; line-height:1.65; font-weight:700; border-radius:20px; padding:18px; }
-.user { background:white; border:2px solid #D0D5DD; }
-.ai { background:#FFF8D6; border:2px solid #FFD400; }
-.red { color:#E53935; font-size:28px; font-weight:900; }
-.stButton>button { width:100%; min-height:3.2rem; border-radius:16px; font-size:18px; font-weight:900; }
-div[data-testid="stMetric"] { background:white; border:1px solid #E4E7EC; border-radius:18px; padding:12px; }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg:#F6F8FC;
+    --surface:#FFFFFF;
+    --ink:#111827;
+    --muted:#667085;
+    --line:#E5E7EB;
+    --brand:#FFD400;
+    --brand2:#FFB800;
+    --navy:#111827;
+    --blue:#2563EB;
+    --red:#E53935;
+    --green:#16A34A;
+    --orange:#F97316;
+    --shadow:0 18px 50px rgba(15,23,42,.11);
+    --shadow-sm:0 8px 26px rgba(15,23,42,.08);
+}
+
+.stApp {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(255,212,0,.22), transparent 28%),
+        radial-gradient(circle at 90% 8%, rgba(37,99,235,.10), transparent 26%),
+        var(--bg) !important;
+    color:var(--ink) !important;
+    font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+* {
+    font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.block-container {
+    max-width:1120px;
+    padding-top:1.25rem;
+    padding-bottom:4rem;
+}
+
+header, footer, #MainMenu {
+    visibility:hidden;
+}
+
+.card {
+    background:rgba(255,255,255,.96) !important;
+    color:var(--ink) !important;
+    border:1px solid rgba(229,231,235,.92);
+    border-radius:26px;
+    padding:24px;
+    margin-bottom:16px;
+    box-shadow:var(--shadow-sm);
+    backdrop-filter:blur(6px);
+}
+
+.card * {
+    color:var(--ink) !important;
+}
+
+.yellow {
+    background:linear-gradient(135deg,#FFF7C2 0%,#FFFDF0 100%) !important;
+    color:var(--ink) !important;
+    border:1px solid rgba(255,212,0,.85);
+    border-radius:26px;
+    padding:22px;
+    margin-bottom:16px;
+    box-shadow:0 12px 34px rgba(255,184,0,.16);
+}
+
+.yellow * {
+    color:var(--ink) !important;
+}
+
+.title {
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:-1.2px;
+    text-align:left;
+    color:#FFFFFF !important;
+}
+
+.sub {
+    color:#D1D5DB !important;
+    font-size:17px;
+    margin-top:8px;
+    line-height:1.65;
+    text-align:left;
+}
+
+.sec {
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:-.55px;
+    margin:8px 0 14px;
+    color:var(--ink) !important;
+}
+
+.header-card {
+    background:linear-gradient(135deg, #111827 0%, #1F2937 58%, #2B2408 100%);
+    border-radius:34px;
+    padding:34px;
+    box-shadow:var(--shadow);
+    margin-bottom:18px;
+    position:relative;
+    overflow:hidden;
+}
+
+.header-card:after {
+    content:'';
+    position:absolute;
+    right:-70px;
+    top:-80px;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,212,0,.22);
+}
+
+.header-card * {
+    position:relative;
+    z-index:1;
+}
+
+.kicker {
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    font-size:14px;
+    font-weight:900;
+    color:#FFFFFF !important;
+    margin-bottom:12px;
+}
+
+.flow {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:22px;
+}
+
+.flow-step {
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:17px;
+    padding:12px;
+    text-align:center;
+    font-size:14px;
+    font-weight:900;
+    color:#E5E7EB !important;
+}
+
+.flow-step.active {
+    background:#FFD400;
+    color:#111827 !important;
+    border-color:#FFD400;
+}
+
+.badge {
+    display:inline-flex;
+    align-items:center;
+    background:#EEF2FF;
+    color:#3730A3 !important;
+    border:1px solid #C7D2FE;
+    padding:7px 11px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:900;
+    margin-right:6px;
+    margin-bottom:8px;
+}
+
+.badge-warning {
+    background:#FFF7ED;
+    color:#C2410C !important;
+    border-color:#FED7AA;
+}
+
+.badge-success {
+    background:#ECFDF3;
+    color:#027A48 !important;
+    border-color:#ABEFC6;
+}
+
+.badge-dark {
+    background:#111827;
+    color:white !important;
+    border-color:#111827;
+}
+
+.bubble {
+    font-size:22px;
+    line-height:1.75;
+    font-weight:800;
+    border-radius:26px;
+    padding:24px;
+    color:var(--ink) !important;
+    box-shadow:0 10px 28px rgba(15,23,42,.08);
+    margin-bottom:16px;
+}
+
+.user {
+    background:#FFFFFF !important;
+    border:1px solid #CBD5E1;
+}
+
+.ai {
+    background:linear-gradient(135deg,#FFF8D6 0%,#FFFFFF 100%) !important;
+    border:2px solid var(--brand);
+}
+
+.red {
+    color:var(--red) !important;
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:-.4px;
+}
+
+.stButton>button {
+    width:100%;
+    min-height:3.35rem;
+    border-radius:18px;
+    font-size:17px;
+    font-weight:900;
+    background:linear-gradient(135deg,#FFD400 0%,#FFC000 100%) !important;
+    color:#111827 !important;
+    border:1px solid rgba(17,24,39,.08) !important;
+    box-shadow:0 8px 18px rgba(255,184,0,.22);
+    transition:all .16s ease;
+}
+
+.stButton>button:hover {
+    transform:translateY(-1px);
+    box-shadow:0 12px 26px rgba(255,184,0,.28);
+    border-color:#FFB800 !important;
+}
+
+div[data-testid="stMetric"] {
+    background:#FFFFFF !important;
+    color:var(--ink) !important;
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:16px;
+    box-shadow:0 8px 22px rgba(15,23,42,.06);
+}
+
+div[data-testid="stMetric"] * {
+    color:var(--ink) !important;
+}
+
+[data-testid="stDataFrame"] {
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(15,23,42,.06);
+}
+
+@media (max-width: 780px) {
+    .block-container {
+        padding-left:1rem;
+        padding-right:1rem;
+    }
+
+    .title {
+        font-size:31px;
+    }
+
+    .header-card {
+        padding:25px;
+        border-radius:26px;
+    }
+
+    .flow {
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 </style>
 '''
 st.markdown(CSS, unsafe_allow_html=True)
@@ -142,7 +405,22 @@ def cost_data():
     return base, extra, human, 13_500_000, 9_800_000
 
 def header():
-    st.markdown('<div class="card"><div class="title">☎️ 온디멘드 AI콜센터</div><div class="sub">AI 1차 상담 + 인간 상담원 예외 대응형 콜센터 데모</div></div>', unsafe_allow_html=True)
+    st.markdown('''
+    <div class="header-card">
+        <div class="kicker">☎️ AI Call Center Demo</div>
+        <div class="title">온디멘드 AI콜센터</div>
+        <div class="sub">
+            반복 상담은 AI가 즉시 처리하고, 장애·민원·긴급상황은 인간 상담원이 이어받는
+            하이브리드 콜센터 데모입니다.
+        </div>
+        <div class="flow">
+            <div class="flow-step active">콜 인입</div>
+            <div class="flow-step">AI 분석</div>
+            <div class="flow-step">예약/이관</div>
+            <div class="flow-step">관리자 확인</div>
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
 
 def nav():
     c1, c2 = st.columns(2)
@@ -153,7 +431,17 @@ def nav():
 
 def main():
     header()
-    st.markdown('<div class="card"><div class="sec">데모 목적</div>차량 배차, 예약, 주문, 스케줄링 업무를 AI가 먼저 상담하고 장애·민원·긴급상황은 인간 상담원이 이어받는 구조를 보여줍니다.</div>', unsafe_allow_html=True)
+    st.markdown('''
+<div class="card">
+    <span class="badge badge-dark">Demo Scenario</span>
+    <span class="badge">택시 예약</span>
+    <span class="badge badge-warning">장애 대응</span>
+    <span class="badge badge-success">비용 절감</span>
+    <div class="sec">데모 목적</div>
+    차량 배차, 예약, 주문, 스케줄링 업무를 AI가 먼저 상담하고
+    장애·민원·긴급상황은 인간 상담원이 이어받는 구조를 보여줍니다.
+</div>
+''', unsafe_allow_html=True)
     if st.button("☎️ AI 상담 시작"):
         go("inbound")
     if st.button("⚠️ 장애 대응 데모 보기"):
